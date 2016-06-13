@@ -18,7 +18,8 @@ RUN     set -x ; \
             apt-get clean && \
             rm -rf /car/lib/apt/lists/* \
             && \
-        mkdir -p /usr/lib/open365
+        mkdir -p /usr/lib/open365 && \
+        mv /usr/bin/gimp /usr/bin/_gimp
         
 
 COPY    scripts/* /usr/bin/
