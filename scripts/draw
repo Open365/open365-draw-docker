@@ -1,0 +1,3 @@
+#!/bin/bash
+
+HOME=/home/user gimp --no-splash "$@"
