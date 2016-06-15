@@ -1,3 +1,3 @@
 #!/bin/bash
 
-HOME=/home/user _gimp --no-splash "$@"
+/opt/gimp/bin/gimp-2.9 --no-splash "$@"

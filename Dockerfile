@@ -2,7 +2,16 @@ FROM    docker-registry.eyeosbcn.com/open365-base-with-dependencies
 
 RUN     set -x ; \
         export DEBIAN_FRONTEND=noninteractive ; \
-        apt-get update && apt-get install --no-install-recommends -y unzip curl gimp=2.8.14-1ubuntu2 && \
+        apt-add-repository -y ppa:otto-kesselgulasch/gimp-edge && \
+        apt-get update && apt-get install --no-install-recommends -y build-essential intltool autoconf pkg-config unzip curl \
+        libbabl-dev libgegl-dev libjson-glib-dev libatk1.0-dev libgtk2.0-dev libgtk2.0-bin libgexiv2-dev libtiff5-dev libzzip-dev libbz2-dev liblcms2-dev libpython-dev python-gtk2-dev && \
+        curl --location --remote-name https://download.gimp.org/mirror/pub/gimp/v2.9/gimp-2.9.2.tar.bz2 && \
+        tar xvf gimp-2.9.2.tar.bz2 && rm gimp-2.9.2.tar.bz2 && cd gimp-2.9.2 && \
+        true
+COPY    patches /opt/patches
+RUN     cd gimp-2.9.2 && \
+        patch -p1 < /opt/patches/remove-old-GEGL-multiline-prop.patch && \
+        ./configure --prefix=/opt/gimp && make -j4 && make install && \
         apt-get clean && \
         apt-get -y autoremove \
             curl \
@@ -18,8 +27,7 @@ RUN     set -x ; \
             apt-get clean && \
             rm -rf /car/lib/apt/lists/* \
             && \
-        mkdir -p /usr/lib/open365 && \
-        mv /usr/bin/gimp /usr/bin/_gimp
+        mkdir -p /usr/lib/open365
         
 
 COPY    scripts/* /usr/bin/

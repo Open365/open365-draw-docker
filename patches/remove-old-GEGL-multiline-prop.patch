@@ -1,0 +1,21 @@
+diff --git a/app/core/gimpparamspecs-duplicate.c b/app/core/gimpparamspecs-duplicate.c
+index 10671cd..cc140aa 100644
+--- a/app/core/gimpparamspecs-duplicate.c
++++ b/app/core/gimpparamspecs-duplicate.c
+@@ -73,16 +73,6 @@ gimp_param_spec_duplicate (GParamSpec *pspec)
+                                       spec->default_value,
+                                       flags);
+
+-          if (GEGL_IS_PARAM_SPEC_MULTILINE (pspec))
+-            {
+-              static GQuark multiline_quark = 0;
+-
+-              if (! multiline_quark)
+-                multiline_quark = g_quark_from_static_string ("multiline");
+-
+-              g_param_spec_set_qdata (copy, multiline_quark,
+-                                      GINT_TO_POINTER (TRUE));
+-            }
+         }
+     }
+   else if (G_IS_PARAM_SPEC_BOOLEAN (pspec))
