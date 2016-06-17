@@ -28,7 +28,7 @@ RUN     set -x ; \
             wget \
             && \
             apt-get clean && \
-            rm -rf /car/lib/apt/lists/* \
+            rm -rf /var/lib/apt/lists/* \
             && \
         mkdir -p /usr/lib/open365
         
