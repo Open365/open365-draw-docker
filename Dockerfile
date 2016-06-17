@@ -36,9 +36,9 @@ RUN     set -x ; \
 COPY    scripts/* /usr/bin/
 COPY    gimp-default-settings /etc/skel/.gimp-2.8
 
+COPY    gimp-themes /opt/gimp/share/gimp/2.0/themes
 # Install theme
-COPY    Breeze-gtk.zip /root/
-RUN     mkdir -p /usr/share/themes && cd /usr/share/themes && unzip /root/Breeze-gtk.zip && mv theme/Breeze-gtk ./ && rm -rf theme
-COPY    gtk3Settings.ini /etc/gtk-3.0/settings.ini
+COPY    Breeze-dark-gtk /usr/share/themes/Breeze-dark-gtk
+COPY    gtkrc /usr/share/gtk-2.0/gtkrc
 COPY    run.debug.sh /root/run.debug.sh
 COPY    migrations.d /usr/lib/open365/migrations.d

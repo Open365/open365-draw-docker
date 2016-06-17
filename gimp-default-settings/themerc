@@ -4,7 +4,7 @@
 # It is NOT supposed to be edited manually. Edit your personal
 # gtkrc file instead (/home/eyeos/.gimp-2.8/gtkrc).
 
-include "/usr/share/gimp/2.0/themes/Default/gtkrc"
-include "/home/eyeos/.gimp-2.8/gtkrc"
+include "/usr/share/gimp/2.0/themes/Dark/gtkrc"
+include "/home/user/.gimp-2.8/gtkrc"
 
 # end of themerc
