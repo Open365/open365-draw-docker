@@ -6,6 +6,7 @@ RUN     set -x ; \
         apt-add-repository -y ppa:otto-kesselgulasch/gimp-edge && \
         apt-get update && \
         apt-get install --no-install-recommends -y build-essential intltool autoconf pkg-config unzip curl \
+        libgegl-0.3.0 libgexiv2-2 \
         libbabl-dev libgegl-dev libjson-glib-dev libatk1.0-dev libgtk2.0-dev libgtk2.0-bin libgexiv2-dev \
         libtiff5-dev libzzip-dev libbz2-dev liblcms2-dev libpython-dev python-gtk2-dev xsltproc && \
         \
@@ -15,21 +16,42 @@ RUN     set -x ; \
         patch -p1 < /opt/patches/mark-version-as-stable.patch && \
         cp data/images/gimp-devel-logo.png data/images/gimp-logo.png && \
         ./configure --prefix=/opt/gimp && make -j4 && make install && \
-        apt-get clean && \
+        cd .. && rm -rf gimp-2.9.2 && \
         apt-get -y autoremove \
+            autoconf \
+            build-essential \
             curl \
             g++ \
             gcc \
+            intltool \
+            libatk1.0-dev \
+            libbabl-dev \
+            libbz2-dev \
+            libgegl-dev \
+            libgexiv2-dev \
+            libgtk2.0-dev \
+            libjson-glib-dev \
+            liblcms2-dev \
+            libpython-dev \
+            libtiff5-dev \
+            libzzip-dev \
             netcat \
             netcat-openbsd \
             netcat-traditional \
             ngrep \
+            pkg-config \
+            python-gtk2-dev \
             strace \
             wget \
+            xsltproc \
             && \
-            apt-get clean && \
-            rm -rf /var/lib/apt/lists/* \
-            && \
+        apt-get clean && \
+        rm -rf \
+            /var/lib/apt/lists/* \
+            /usr/share/man/* \
+            /usr/share/doc/* \
+            /tmp/* \
+        && \
         mkdir -p /usr/lib/open365
         
 
